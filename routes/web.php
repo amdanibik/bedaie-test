@@ -11,8 +11,9 @@ Route::get('/', function () {
 
 // One-time migration endpoint — protected by secret token
 Route::get('/run-migrations', function () {
-    $secret = config('app.migrate_secret', '');
-    if (empty($secret) || request('token') !== $secret) {
+    $secret = trim(env('MIGRATE_SECRET', ''));
+    $token  = trim(request('token', ''));
+    if (empty($secret) || $token !== $secret) {
         abort(403, 'Forbidden');
     }
     Artisan::call('migrate', ['--force' => true]);
