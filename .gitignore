@@ -1,6 +1,5 @@
 /.phpunit.cache
 /node_modules
-/public/build
 /bootstrap/cache/*.php
 /public/hot
 /public/storage
