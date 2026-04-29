@@ -28,6 +28,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'migrate_secret' => env('MIGRATE_SECRET', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
