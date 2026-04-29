@@ -4,11 +4,12 @@
  * Vercel Serverless Entry Point for Laravel
  *
  * Vercel's filesystem is read-only except for /tmp,
- * so we redirect Laravel's storage and cache to /tmp.
+ * so we redirect Laravel's storage and bootstrap cache to /tmp.
  */
 
-$storagePath = '/tmp/storage';
-$cachePath = '/tmp/bootstrap/cache';
+$appPath    = dirname(__DIR__);
+$storagePath   = '/tmp/storage';
+$cachePath  = '/tmp/bootstrap/cache';
 $dirs = [
     "$storagePath/app/public",
     "$storagePath/framework/cache/data",
@@ -24,9 +25,16 @@ foreach ($dirs as $dir) {
     }
 }
 
-$_ENV['APP_STORAGE'] = $storagePath;
-$_ENV['APP_CACHE_PATH'] = $cachePath;
+// Copy providers.php to writable location (bootstrap/providers.php must be readable)
+$providersSource = $appPath . '/bootstrap/providers.php';
+$providersDest   = '/tmp/bootstrap/providers.php';
+if (!file_exists($providersDest) && file_exists($providersSource)) {
+    copy($providersSource, $providersDest);
+}
 
-$publicPath = __DIR__ . '/../public';
+$_ENV['APP_STORAGE']        = $storagePath;
+$_ENV['APP_BOOTSTRAP_PATH'] = '/tmp/bootstrap';
+
+$publicPath = $appPath . '/public';
 chdir($publicPath);
 require $publicPath . '/index.php';

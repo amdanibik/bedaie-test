@@ -17,9 +17,13 @@ $app = Application::configure(basePath: dirname(__DIR__))
         //
     })->create();
 
-// Support custom storage path for serverless environments (e.g. Vercel)
+// Support custom storage/bootstrap paths for serverless environments (e.g. Vercel)
 if (!empty($_ENV['APP_STORAGE'])) {
     $app->useStoragePath($_ENV['APP_STORAGE']);
+}
+
+if (!empty($_ENV['APP_BOOTSTRAP_PATH'])) {
+    $app->useBootstrapPath($_ENV['APP_BOOTSTRAP_PATH']);
 }
 
 return $app;
