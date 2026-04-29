@@ -35,6 +35,11 @@ if (!file_exists($providersDest) && file_exists($providersSource)) {
 $_ENV['APP_STORAGE']        = $storagePath;
 $_ENV['APP_BOOTSTRAP_PATH'] = '/tmp/bootstrap';
 
+// Vercel filesystem is read-only; override drivers that need local file writes
+$_ENV['SESSION_DRIVER'] = $_ENV['SESSION_DRIVER'] ?? 'cookie';
+$_ENV['CACHE_STORE']    = $_ENV['CACHE_STORE'] ?? 'array';
+$_ENV['LOG_CHANNEL']    = $_ENV['LOG_CHANNEL'] ?? 'stderr';
+
 $publicPath = $appPath . '/public';
 chdir($publicPath);
 require $publicPath . '/index.php';
