@@ -22,9 +22,4 @@ if (!empty($_ENV['APP_STORAGE'])) {
     $app->useStoragePath($_ENV['APP_STORAGE']);
 }
 
-// Support custom bootstrap cache path for serverless environments (e.g. Vercel)
-if (!empty($_ENV['APP_CACHE_PATH'])) {
-    $app->useCachePath($_ENV['APP_CACHE_PATH']);
-}
-
 return $app;
