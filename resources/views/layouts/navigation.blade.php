@@ -5,7 +5,7 @@
             <div class="flex items-center gap-8">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2 shrink-0">
                     <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
